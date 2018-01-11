@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha --recursive --timeout 55000 tests/functional"
+    "test": "mocha --recursive tests/functional"
   },
   "repository": {
     "type": "git",

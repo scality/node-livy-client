@@ -141,7 +141,6 @@ describe('LivyClient tests', function testClient() {
                     assert.strictEqual(res.id, this.quickStatementId);
                     assert.strictEqual(res.state, 'waiting');
                     assert.strictEqual(res.output, null);
-                    assert.strictEqual(res.code, codeToExecute);
                     done();
                 });
         });
@@ -161,16 +160,14 @@ describe('LivyClient tests', function testClient() {
 
         it('should post a session statement with a long program',
         function itF(done) {
-            const codeToExecute = 'for(n <- 1 to 1000000) ' +
-                '{ Range(2, n-1).filter(primeTester => n % primeTester == 0).' +
-                'length == 0 }';
+            const codeToExecute = 'Thread.sleep(1000000) \n' +
+                '2 + 2';
             client.postStatement(this.sessionId, codeToExecute,
                 (err, res) => {
                     this.longStatementId = res.id;
                     assert.ifError(err);
                     assert.strictEqual(res.state, 'waiting');
                     assert.strictEqual(res.output, null);
-                    assert.strictEqual(res.code, codeToExecute);
                     done();
                 });
         });
@@ -187,17 +184,12 @@ describe('LivyClient tests', function testClient() {
         });
 
         it('should cancel in-progress statement', function itF(done) {
-            const codeToExecute = 'for(n <- 1 to 1000000) ' +
-                '{ Range(2, n-1).filter(primeTester => n % primeTester == 0).' +
-                'length == 0 }';
-            client.postStatement(this.sessionId, codeToExecute,
-            (err, res) => {
-                client.cancelStatement(this.sessionId, res.id, (err, res) => {
+            client.cancelStatement(this.sessionId, this.longStatementId,
+                (err, res) => {
                     assert.ifError(err);
-                    assert.strictequal(res.msg, 'canceled');
+                    assert.strictEqual(res.msg, 'canceled');
                     done();
                 });
-            });
         });
     });
 
