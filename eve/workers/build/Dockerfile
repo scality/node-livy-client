@@ -10,6 +10,7 @@ RUN apt-get update -q \
     && pip install pip==9.0.1 \
     && rm -rf /var/lib/apt/lists/* \
     && rm -f /tmp/*_packages.list
+    && apt-get install npm
 
 
 # Install nodejs packages
