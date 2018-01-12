@@ -1,0 +1,37 @@
+{
+  "name": "node-livy-client",
+  "version": "1.0.0",
+  "description": "Node client for Apache LIVY REST API for Spark",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha --recursive tests/functional"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scality/node-livy-client.git"
+  },
+  "keywords": [
+    "spark",
+    "livy",
+    "client"
+  ],
+  "author": "Scality",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/scality/node-livy-client/issues"
+  },
+  "homepage": "https://github.com/scality/node-livy-client#readme",
+  "devDependencies": {
+    "eslint": "2.13.1",
+    "eslint-plugin-react": "^4.3.0",
+    "eslint-config-airbnb": "6.2.0",
+    "eslint-config-scality": "scality/Guidelines",
+    "mocha": "^4.1.0"
+  },
+  "dependencies": {
+    "backo": "^1.1.0"
+  }
+}

@@ -1,0 +1,24 @@
+---
+version: 0.2
+
+branches:
+  default:
+    stage: pre-merge
+
+stages:
+  pre-merge:
+    worker:
+      type: docker
+      path: eve/workers/build
+      volumes:
+        - '/home/eve/workspace'
+      steps:
+        - Git:
+            name: fetch source
+            repourl: '%(prop:git_reference)s'
+            shallow: True
+            retryFetch: True
+            haltOnFailure: True
+        - ShellCommand:
+            name: run tests for livy client
+            command: npm test
