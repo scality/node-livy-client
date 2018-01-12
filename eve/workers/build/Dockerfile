@@ -1,4 +1,4 @@
-FROM scality/clueso-livy:pensieve
+FROM scality/clueso-livy:pensieve-jay
 
 #
 # Install apt packages needed by the buildchain
