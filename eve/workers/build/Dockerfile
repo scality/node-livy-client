@@ -9,9 +9,11 @@ RUN apt-get update -q \
     && cat /tmp/*_packages.list | xargs apt-get install -qy \
     && pip install pip==9.0.1 \
     && rm -rf /var/lib/apt/lists/* \
-    && rm -f /tmp/*_packages.list \
-    && apt-get install node \
-    && apt-get install npm \
+    && rm -f /tmp/*_packages.list
+
+RUN apt-get update -q \
+    && apt-get install -y node \
+    && apt-get install -y npm \
     && npm install -g n \
     && n 6.9.5
 
