@@ -7,3 +7,7 @@ python2.7-dev
 python-pip
 software-properties-common
 sudo
+build-essential
+g++-4.9
+netcat
+nodejs
