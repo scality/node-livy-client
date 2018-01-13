@@ -5,18 +5,13 @@ FROM scality/clueso-livy:pensieve-jay
 #
 
 COPY buildbot_worker_packages.list /tmp/
-RUN apt-get update -q \
+RUN apt-get update -qq \
+    && apt-get install -qqy curl \
+    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && cat /tmp/*_packages.list | xargs apt-get install -qy \
     && pip install pip==9.0.1 \
     && rm -rf /var/lib/apt/lists/* \
     && rm -f /tmp/*_packages.list
-
-RUN apt-get update -q \
-    && apt-get install -y node \
-    && apt-get install -y npm \
-    && npm install -g n \
-    && n 6.9.5
-
 
 # Install nodejs packages
 WORKDIR /usr/lib/
