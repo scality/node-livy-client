@@ -42,3 +42,5 @@ WORKDIR /home/eve/workspace
 #     && buildbot-worker start --nodaemon
 
 CMD supervisor -c /etc/supervisor/conf.d
+
+ENTRYPOINT /bin/bash
