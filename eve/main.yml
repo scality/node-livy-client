@@ -21,7 +21,7 @@ stages:
           haltOnFailure: True
       - ShellCommand:
           name: get api node modules from cache
-          command: mv /usr/lib/node_modules .
+          command: npm install && npm install -g mocha
       - ShellCommand:
           name: run tests for livy client
           command: npm test
