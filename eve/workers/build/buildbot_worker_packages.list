@@ -11,3 +11,4 @@ build-essential
 g++-4.9
 netcat
 nodejs
+supervisor

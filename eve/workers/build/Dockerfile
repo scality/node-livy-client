@@ -32,10 +32,13 @@ RUN adduser -u 1042 --home /home/eve --disabled-password --gecos "" eve \
 
 ARG BUILDBOT_VERSION
 RUN pip install buildbot-worker==$BUILDBOT_VERSION
+ADD supervisor/buildbot_worker.conf /etc/supervisor/conf.d
 
 ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
 
-CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
-    && buildbot-worker start --nodaemon
+# CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
+#     && buildbot-worker start --nodaemon
+
+CMD supervisor -c /etc/supervisor/conf.d
