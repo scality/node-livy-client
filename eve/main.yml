@@ -20,5 +20,8 @@ stages:
           retryFetch: True
           haltOnFailure: True
       - ShellCommand:
+          name: get api node modules from cache
+          command: mv /usr/lib/node_modules .
+      - ShellCommand:
           name: run tests for livy client
           command: npm test
