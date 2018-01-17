@@ -8,19 +8,6 @@ else
   export LIBPROCESS_IP=$HOST
 fi
 
-# Wait for spark master
-# This allows clean startup
-RETRY=15
-echo "Waiting for spark master"
-while ! nc -z spark-master 7077 &>/dev/null ; do
-  RETRY=$((RETRY-1))
-  if [ $RETRY == 0 ]; then
-    echo "Cannot contact spark master on 7077"
-    exit 1
-  fi
-  sleep 1
-done
-
 echo "Starting Livy Server"
 # start Livy
 $LIVY_APP_PATH/bin/livy-server $@
