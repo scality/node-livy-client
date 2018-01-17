@@ -24,4 +24,5 @@ stages:
           command: mv /home/eve/node_reqs/node_modules .
       - ShellCommand:
           name: run tests for livy client
-          command: sudo /app/livy/entrypoint.sh & npm test
+          command: sudo /app/livy/entrypoint.sh & \
+            sleep 5 && npm test
