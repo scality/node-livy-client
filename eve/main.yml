@@ -21,7 +21,7 @@ stages:
           haltOnFailure: True
       - ShellCommand:
           name: get api node modules from cache
-          command: npm install && npm install -g mocha
+          command: mv /home/eve/node_reqs/node_modules .
       - ShellCommand:
           name: run tests for livy client
           command: npm test
