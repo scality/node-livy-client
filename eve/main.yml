@@ -27,4 +27,4 @@ stages:
           command: mv /home/eve/node_reqs/node_modules .
       - ShellCommand:
           name: run tests for livy client
-          command: npm test
+          command: curl -v localhost:8998 && npm test
