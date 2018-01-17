@@ -10,4 +10,4 @@ fi
 
 echo "Starting Livy Server"
 # start Livy
-$LIVY_APP_PATH/bin/livy-server $@
+/apps/livy/bin/livy-server $@
