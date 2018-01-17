@@ -31,6 +31,11 @@ RUN adduser -u 1042 --home /home/eve --disabled-password --gecos "" eve \
     && adduser eve sudo \
     && sed -ri 's/(%sudo.*)ALL$/\1NOPASSWD:ALL/' /etc/sudoers
 
+
+ADD supervisor/livy.conf /etc/supervisor/conf.d/
+
+USER eve
+
 #
 # Install node modules
 #
@@ -38,9 +43,6 @@ RUN mkdir /home/eve/node_reqs
 COPY package.json /home/eve/node_reqs/package.json
 RUN cd /home/eve/node_reqs && npm install
 
-ADD supervisor/livy.conf /etc/supervisor/conf.d/
-
-USER eve
 
 ENV CXX=g++-4.9
 USER eve
