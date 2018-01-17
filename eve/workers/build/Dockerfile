@@ -13,11 +13,6 @@ RUN apt-get update -qq \
     && rm -rf /var/lib/apt/lists/* \
     && rm -f /tmp/*_packages.list
 
-# Install nodejs packages
-WORKDIR /usr/lib/
-COPY package.json .
-RUN npm install && npm install -g mocha
-
 #
 # Add user eve
 #
@@ -25,6 +20,14 @@ RUN npm install && npm install -g mocha
 RUN adduser -u 1042 --home /home/eve --disabled-password --gecos "" eve \
     && adduser eve sudo \
     && sed -ri 's/(%sudo.*)ALL$/\1NOPASSWD:ALL/' /etc/sudoers
+
+
+#
+# Install node modules
+#
+RUN mkdir /home/eve/node_reqs
+COPY package.json /home/eve/node_reqs/package.json
+RUN cd /home/eve/node_reqs && npm install
 
 #
 # Run buildbot-worker on startup
