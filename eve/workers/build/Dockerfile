@@ -20,8 +20,8 @@ RUN apt-get update -qq \
 ARG BUILDBOT_VERSION
 RUN pip install buildbot-worker==$BUILDBOT_VERSION
 
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+COPY entrypoint.sh /app/livy/entrypoint.sh
+RUN chmod +x /app/livy/entrypoint.sh
 
 #
 # Add user eve
@@ -46,5 +46,3 @@ WORKDIR /home/eve/workspace
 
 CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
     && buildbot-worker start --nodaemon
-
-RUN ["/bin/bash", "/entrypoint.sh"]
