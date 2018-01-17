@@ -43,3 +43,5 @@ WORKDIR /home/eve/workspace
 
 CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
     && buildbot-worker start --nodaemon
+
+ENTRYPOINT /bin/bash
