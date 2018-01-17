@@ -40,8 +40,11 @@ RUN cd /home/eve/node_reqs && npm install
 
 ADD supervisor/livy.conf /etc/supervisor/conf.d/
 
+USER eve
+
 ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
 
-USER eve
+CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
+    && buildbot-worker start --nodaemon
