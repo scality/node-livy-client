@@ -14,6 +14,13 @@ RUN apt-get update -qq \
     && rm -f /tmp/*_packages.list
 
 #
+# Run buildbot-worker on startup
+#
+
+ARG BUILDBOT_VERSION
+RUN pip install buildbot-worker==$BUILDBOT_VERSION
+
+#
 # Add user eve
 #
 
@@ -30,12 +37,6 @@ RUN mkdir /home/eve/node_reqs
 COPY package.json /home/eve/node_reqs/package.json
 RUN cd /home/eve/node_reqs && npm install
 
-#
-# Run buildbot-worker on startup
-#
-
-ARG BUILDBOT_VERSION
-RUN pip install buildbot-worker==$BUILDBOT_VERSION
 
 ENV CXX=g++-4.9
 USER eve
