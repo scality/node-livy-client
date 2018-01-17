@@ -38,11 +38,11 @@ RUN mkdir /home/eve/node_reqs
 COPY package.json /home/eve/node_reqs/package.json
 RUN cd /home/eve/node_reqs && npm install
 
+ADD supervisor/livy.conf /etc/supervisor/conf.d/
+RUN supervisord -c /etc/supervisor/conf.d/livy.conf
+
 ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
-
-ADD supervisor/livy.conf /etc/supervisor/conf.d/
-RUN supervisor -c /etc/supervisor/conf.d/livy.conf
 
 USER eve
