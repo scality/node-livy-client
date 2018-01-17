@@ -20,6 +20,9 @@ RUN apt-get update -qq \
 ARG BUILDBOT_VERSION
 RUN pip install buildbot-worker==$BUILDBOT_VERSION
 
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
 #
 # Add user eve
 #
@@ -37,10 +40,11 @@ RUN mkdir /home/eve/node_reqs
 COPY package.json /home/eve/node_reqs/package.json
 RUN cd /home/eve/node_reqs && npm install
 
-
 ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
 
 CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
     && buildbot-worker start --nodaemon
+
+RUN ["/bin/bash", "/entrypoint.sh"]
