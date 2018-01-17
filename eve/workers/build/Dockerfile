@@ -1,4 +1,4 @@
-FROM scality/clueso-livy:pensieve-jay
+FROM scality/clueso-livy:pensieve-jay2
 
 #
 # Install apt packages needed by the buildchain
@@ -19,6 +19,9 @@ RUN apt-get update -qq \
 
 ARG BUILDBOT_VERSION
 RUN pip install buildbot-worker==$BUILDBOT_VERSION
+
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
 #
 # Add user eve
@@ -44,4 +47,4 @@ WORKDIR /home/eve/workspace
 CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
     && buildbot-worker start --nodaemon
 
-ENTRYPOINT /bin/bash
+RUN ["/bin/bash", "/entrypoint.sh"]
