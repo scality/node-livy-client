@@ -31,8 +31,6 @@ RUN adduser -u 1042 --home /home/eve --disabled-password --gecos "" eve \
     && adduser eve sudo \
     && sed -ri 's/(%sudo.*)ALL$/\1NOPASSWD:ALL/' /etc/sudoers
 
-USER eve
-
 #
 # Install node modules
 #
@@ -44,5 +42,7 @@ ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
 
-CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
-    && buildbot-worker start --nodaemon
+ADD supervisor/livy.conf /etc/supervisor/conf.d/
+RUN supervisor -c /etc/supervisor/conf.d/livy.conf
+
+USER eve
