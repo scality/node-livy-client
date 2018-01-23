@@ -21,7 +21,7 @@ stages:
           haltOnFailure: True
       - ShellCommand:
           name: start livy client with supervisord
-          command: sudo supervisord -c /etc/supervisor/conf.d/livy.conf
+          command: sudo supervisord -c /etc/supervisor/conf.d/livy.conf -n
       - ShellCommand:
           name: get api node modules from cache
           command: mv /home/eve/node_reqs/node_modules .
