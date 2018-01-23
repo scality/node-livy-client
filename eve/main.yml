@@ -21,7 +21,7 @@ stages:
           haltOnFailure: True
       - ShellCommand:
           name: start livy client with supervisord
-          command: sudo supervisord -c /etc/supervisor/conf.d/livy.conf --logfile=/etc/supervisor/conf.d/supervisor.log
+          command: sudo supervisord -c /etc/supervisor/conf.d/livy.conf
       - ShellCommand:
           name: get api node modules from cache
           command: mv /home/eve/node_reqs/node_modules .
@@ -29,4 +29,4 @@ stages:
           name: run tests for livy client
           command: sleep 40 && npm test
       - ShellCommand:
-          command: cat /etc/supervisor/conf.d/supervisor.log
+          command: cat /etc/supervisor/conf.d/stdout.log && /etc/supervisor/conf.d/stderr.log
