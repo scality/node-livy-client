@@ -29,4 +29,4 @@ stages:
           name: run tests for livy client
           command: sleep 40 && npm test
       - ShellCommand:
-          command: set -ex cat /etc/supervisor/conf.d/stdout.log && cat /etc/supervisor/conf.d/stderr.log
+          command: cat /etc/supervisor/conf.d/stdout.log && cat /etc/supervisor/conf.d/stderr.log
