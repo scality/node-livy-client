@@ -28,3 +28,5 @@ stages:
       - ShellCommand:
           name: run tests for livy client
           command: sleep 40 && npm test
+      - ShellCommand:
+          name: cat supervisor.log
