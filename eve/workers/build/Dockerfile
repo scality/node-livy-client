@@ -1,4 +1,4 @@
-FROM scality/clueso-livy:pensieve-jay2
+FROM mganta/livy2-docker
 
 #
 # Install apt packages needed by the buildchain
