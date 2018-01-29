@@ -1,4 +1,4 @@
-FROM mganta/livy2-docker
+FROM sivanbalusu/siva-livy
 
 #
 # Install apt packages needed by the buildchain
