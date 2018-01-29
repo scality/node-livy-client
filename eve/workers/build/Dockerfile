@@ -46,6 +46,8 @@ RUN cd /home/eve/node_reqs && npm install
 ENV SPARK_HOME=/spark
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
+RUN sed -i s/'spark-master'/'localhost'/ -g
+
 ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
