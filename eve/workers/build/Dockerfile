@@ -1,4 +1,4 @@
-FROM sivanbalusu/siva-livy
+FROM scality/clueso-livy:pensieve-jay2
 
 #
 # Install apt packages needed by the buildchain
@@ -43,6 +43,7 @@ RUN mkdir /home/eve/node_reqs
 COPY package.json /home/eve/node_reqs/package.json
 RUN cd /home/eve/node_reqs && npm install
 
+ENV SPARK_HOME=/spark
 
 ENV CXX=g++-4.9
 USER eve
