@@ -44,7 +44,7 @@ COPY package.json /home/eve/node_reqs/package.json
 RUN cd /home/eve/node_reqs && npm install
 
 ENV SPARK_HOME=/spark
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 ENV CXX=g++-4.9
 USER eve
