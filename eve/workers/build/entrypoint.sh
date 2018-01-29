@@ -12,4 +12,4 @@ export LIBPROCESS_IP='localhost'
 
 echo "Starting Livy Server"
 # start Livy
-/apps/livy/bin/livy-server $@
+sudo /apps/livy/bin/livy-server $@
