@@ -28,6 +28,5 @@ stages:
       - ShellCommand:
           name: run tests for livy client
           command: sleep 40 && npm test
-          usePTY: True
       - ShellCommand:
           command: cat /etc/supervisor/conf.d/livy.log
