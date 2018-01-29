@@ -24,9 +24,10 @@ stages:
           command: sudo supervisord -c /etc/supervisor/conf.d/livy.conf
       - ShellCommand:
           name: get api node modules from cache
-          command: mv /home/eve/node_reqs/node_modules .
+          command: sudo mv /home/eve/node_reqs/node_modules .
       - ShellCommand:
           name: run tests for livy client
           command: sleep 40 && npm test
+          usePTY: True
       - ShellCommand:
           command: cat /etc/supervisor/conf.d/livy.log
