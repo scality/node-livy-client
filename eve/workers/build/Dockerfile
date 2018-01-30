@@ -1,5 +1,4 @@
-FROM gettyimages/spark as base
-FROM ubuntu
+FROM gettyimages/spark
 
 #
 # Install apt packages needed by livy
@@ -9,13 +8,13 @@ RUN apt-get update && apt-get install -yq --no-install-recommends --force-yes \
     wget \
     python \
     git \
-    openjdk-8-jdk \
     maven curl  \
     iproute2 \
     libsvn1 \
     libcurl3 \
     zip unzip \
     netcat less inetutils-ping \
+    python-dev \
     libsasl2-modules && \
     rm -rf /var/lib/apt/lists/* && \
     cd && wget https://bootstrap.pypa.io/ez_setup.py && python ez_setup.py && cd -
@@ -43,14 +42,12 @@ RUN mkdir -p /apps/build && \
     mv /apps/livy* $LIVY_APP_PATH && \
     mkdir -p $LIVY_APP_PATH/logs
 
-COPY --from=base /usr/spark-2.2.1/ /spark/
-
 COPY conf /apps/livy/conf
 COPY conf/log4j.properties /spark/conf/log4j.properties
 COPY conf/spark-defaults.conf /spark/conf/spark-defaults.conf
 
 # Set Spark env
-ENV SPARK_HOME=/spark
+ENV SPARK_HOME=/usr/spark-2.2.1
 ENV SPARK_CONF_DIR=$SPARK_HOME/conf
 
 COPY entrypoint.sh /app/livy/entrypoint.sh
