@@ -3,7 +3,7 @@ FROM scality/clueso-livy:pensieve-jay2
 #
 # Install apt packages needed by the buildchain
 #
-
+ENV LANG C.UTF-8
 COPY buildbot_worker_packages.list /tmp/
 RUN apt-get update -qq \
     && apt-get install -qqy curl \
@@ -47,6 +47,6 @@ RUN cd /home/eve/node_reqs && npm install
 ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
-
+ENV LANG C.UTF-8
 CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
     && buildbot-worker start --nodaemon
