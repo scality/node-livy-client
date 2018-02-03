@@ -13,5 +13,5 @@
 #                     names. (Default: name of the user starting Livy).
 # - LIVY_MAX_LOG_FILES Max number of log file to keep in the log directory. (Default: 5.)
 # - LIVY_NICENESS   Niceness of the Livy server process when running in the background. (Default: 0.)
-SPARK_HOME=/spark
+SPARK_HOME=/usr/spark-2.1.1/
 SPARK_CONF_DIR=$SPARK_HOME/conf

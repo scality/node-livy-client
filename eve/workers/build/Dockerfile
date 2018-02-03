@@ -1,4 +1,4 @@
-FROM gettyimages/spark
+FROM gettyimages/spark:2.1.1-hadoop-2.7
 
 #
 # Install apt packages needed by livy
@@ -7,6 +7,7 @@ FROM gettyimages/spark
 RUN apt-get update && apt-get install -yq --no-install-recommends --force-yes \
     wget \
     python \
+    python3 \
     git \
     maven curl  \
     iproute2 \
@@ -15,6 +16,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends --force-yes \
     zip unzip \
     netcat less inetutils-ping \
     python-dev \
+    python3-dev \
     libsasl2-modules && \
     rm -rf /var/lib/apt/lists/* && \
     cd && wget https://bootstrap.pypa.io/ez_setup.py && python ez_setup.py && cd -
@@ -47,7 +49,7 @@ COPY conf/log4j.properties /spark/conf/log4j.properties
 COPY conf/spark-defaults.conf /spark/conf/spark-defaults.conf
 
 # Set Spark env
-ENV SPARK_HOME=/usr/spark-2.2.1
+ENV SPARK_HOME=/usr/spark-2.1.1
 ENV SPARK_CONF_DIR=$SPARK_HOME/conf
 
 COPY entrypoint.sh /app/livy/entrypoint.sh
