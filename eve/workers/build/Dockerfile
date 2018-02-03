@@ -43,10 +43,10 @@ RUN mkdir /home/eve/node_reqs
 COPY package.json /home/eve/node_reqs/package.json
 RUN cd /home/eve/node_reqs && npm install
 
-
 ENV CXX=g++-4.9
 USER eve
 WORKDIR /home/eve/workspace
+ENV LANG C.UTF-8
 
 CMD buildbot-worker create-worker . "$BUILDMASTER:$BUILDMASTER_PORT" "$WORKERNAME" "$WORKERPASS" \
     && buildbot-worker start --nodaemon
